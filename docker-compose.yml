@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  balance-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    command: mvn install exec:java@TCPServer
+    ports:
+      - "12345:12345"  # Expose port 12345 to access the TCP server
+    volumes:
+      # - ./balance-queue:/app/balance-queue  # Persist the Chronicle-Queue data
+      - ./:/app/  # Persist the Chronicle-Queue data
